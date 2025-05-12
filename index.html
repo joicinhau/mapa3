@@ -5,97 +5,126 @@
   <title>Mapa da Digestão</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
       padding: 20px;
-      line-height: 1.6;
+      max-width: 900px;
+      margin: auto;
     }
-    h1 {
+    h1, h2 {
       text-align: center;
+      color: #39657c;
     }
-    .cenarios {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      justify-content: center;
-    }
-    .cenario {
-      flex: 1;
-      min-width: 300px;
-      max-width: 500px;
+    .etapa {
+      margin-top: 40px;
       text-align: center;
     }
     .imagem-container {
       position: relative;
+      display: inline-block;
+      margin-top: 20px;
+      cursor: pointer;
     }
     .imagem-container img {
       width: 100%;
-      height: auto;
+      max-width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    .icone {
+    .botao-palavra {
       position: absolute;
-      width: 50px;
-      height: 50px;
-      cursor: pointer;
-    }
-    #lactose {
-      top: 30%;
-      left: 30%;
-    }
-    #lactase {
-      top: 30%;
-      left: 60%;
-    }
-    .resultado, .mensagem, .gases {
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    .sintomas {
-      margin-top: 50px;
-    }
-    button {
-      margin-top: 30px;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: #4285f4;
+      background-color: #52849d;
       color: white;
       border: none;
       border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 0.9em;
     }
-    a {
-      text-decoration: none;
+    #botao-lactase {
+      top: 35%;
+      left: 55%;
+    }
+    .palavra-estatica {
+      position: absolute;
+      top: 20%;
+      left: 20%;
+      background-color: #f0c040;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+    .texto {
+      margin-top: 20px;
+      font-size: 1.1em;
+      padding: 10px;
+      background-color: #e6f0f5;
+      border-left: 4px solid #39657c;
+    }
+    .botao {
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #39657c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    ol {
+      text-align: left;
+      max-width: 600px;
+      margin: auto;
+    }
+    a button {
+      background-color: #52849d;
+    }
+    .linha-divisao {
+      height: 2px;
+      background-color: #ccc;
+      margin: 50px auto;
+      width: 80%;
     }
   </style>
 </head>
 <body>
   <h1>Mapa da Digestão</h1>
-  <p style="text-align:center; font-style: italic;">Clique nos ícones para entender os processos de digestão da lactose com e sem lactase.</p>
 
-  <div class="cenarios">
-    <!-- CENÁRIO COM LACTOSE E LACTASE -->
-    <div class="cenario">
-      <h2>Com Lactose e Lactase</h2>
-      <div class="imagem-container">
-        <img src="https://i.postimg.cc/t1MbsdDw/intestino-seco.png" alt="Intestino grosso" id="imgCom">
-        <img src="https://img.icons8.com/emoji/48/milk-glass.png" class="icone" id="lactose" title="Lactose">
-        <img src="https://img.icons8.com/emoji/48/test-tube.png" class="icone" id="lactase" title="Lactase">
-      </div>
-      <div class="resultado" id="resultadoCom"></div>
+  <!-- COM LACTASE -->
+  <div class="etapa" id="etapaComLactase">
+    <h2>Digestão com Lactase</h2>
+    <div class="imagem-container">
+      <img src="https://i.postimg.cc/t1MbsdDw/intestino-seco.png" alt="Intestino com lactose e lactase">
+      <div class="palavra-estatica" style="top: 20%; left: 25%;">Lactose</div>
+      <button class="botao-palavra" id="botao-lactase">Lactase</button>
     </div>
-
-    <!-- CENÁRIO SEM LACTASE -->
-    <div class="cenario">
-      <h2>Sem Lactase</h2>
-      <div class="imagem-container">
-        <img src="https://i.postimg.cc/t1MbsdDw/intestino-seco.png" alt="Intestino grosso" id="imgSem" onclick="mostrarDiarreia()">
-      </div>
-      <div class="mensagem" id="mensagemSem"></div>
-      <div class="gases" id="gasesSem"></div>
-    </div>
+    <div class="texto" id="texto1">Clique em "Lactase" para iniciar o processo de digestão correta da lactose.</div>
+    <div class="texto" id="resultado1" style="display: none;">Lactose + Lactase → Glicose + Galactose → Absorção no sangue.</div>
   </div>
 
-  <!-- SINTOMAS -->
-  <div class="sintomas">
+  <div class="linha-divisao"></div>
+
+  <!-- SEM LACTASE -->
+  <div class="etapa" id="etapaSemLactase">
+    <h2>Digestão sem Lactase</h2>
+    <div class="imagem-container" onclick="mostrarDiarreia()">
+      <img src="https://i.postimg.cc/t1MbsdDw/intestino-seco.png" id="imgEtapa2" alt="Intestino sem lactase">
+      <div class="palavra-estatica" style="top: 20%; left: 25%;">Lactose</div>
+    </div>
+    <div class="texto" id="texto2">Clique na imagem para ver o que acontece sem lactase.</div>
+  </div>
+
+  <div class="etapa" id="etapaGases" style="display: none;">
+    <div class="imagem-container">
+      <img src="https://i.postimg.cc/TKzC7pkF/intestino-com-agua.png" alt="Intestino com água e gases">
+      <div class="palavra-estatica" style="top: 20%; left: 25%;">Lactose</div>
+    </div>
+    <div class="texto" id="texto3">A lactose não digerida gerou CH₄, H₂ e CO₂ — gases prejudiciais e diarreia.</div>
+  </div>
+
+  <div class="etapa">
     <h2>Possíveis Sintomas</h2>
     <ol>
       <li>Diarreia aquosa ou pastosa</li>
@@ -107,44 +136,27 @@
     </ol>
   </div>
 
-  <!-- BOTÃO DE CERTIFICADO -->
-  <div style="text-align:center;">
+  <div class="etapa" style="text-align: center;">
     <a href="https://sites.google.com/view/leite-e-pet/pag" target="_self">
-      <button>Ganhe seu certificado</button>
+      <button class="botao">Ganhe seu certificado</button>
     </a>
   </div>
 
   <script>
-    // Lógica de combinação de lactose e lactase
-    const lactose = document.getElementById('lactose');
-    const lactase = document.getElementById('lactase');
-    const resultadoCom = document.getElementById('resultadoCom');
+    let jaClicouSemLactase = false;
 
-    let clicouLactose = false;
-    let clicouLactase = false;
+    document.getElementById("botao-lactase").addEventListener("click", () => {
+      document.getElementById("resultado1").style.display = "block";
+    });
 
-    lactose.onclick = () => {
-      clicouLactose = true;
-      verificarCombinacao();
-    };
-
-    lactase.onclick = () => {
-      clicouLactase = true;
-      verificarCombinacao();
-    };
-
-    function verificarCombinacao() {
-      if (clicouLactose && clicouLactase) {
-        resultadoCom.innerText = 'Lactose + Lactase → Glicose + Galactose → Absorção no sangue';
-      }
-    }
-
-    // Lógica para o cenário sem lactase
     function mostrarDiarreia() {
-      document.getElementById('imgSem').src = 'https://i.postimg.cc/TKzC7pkF/intestino-com-agua.png';
-      document.getElementById('mensagemSem').innerText = 'A presença de lactose no intestino grosso causou diarreia.';
+      if (jaClicouSemLactase) return;
+      jaClicouSemLactase = true;
+      const imagem = document.getElementById("imgEtapa2");
+      imagem.src = "https://i.postimg.cc/TKzC7pkF/intestino-com-agua.png";
+      document.getElementById("texto2").innerText = "A lactose chegou ao intestino grosso e causou diarreia.";
       setTimeout(() => {
-        document.getElementById('gasesSem').innerText = 'A lactose não digerida gerou CH₄, H₂ e CO₂ — gases prejudiciais';
+        document.getElementById("etapaGases").style.display = "block";
       }, 2000);
     }
   </script>
