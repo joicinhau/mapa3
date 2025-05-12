@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Mapa da Digestão</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      text-align: center;
+    }
+    .cenarios {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+    }
+    .cenario {
+      flex: 1;
+      min-width: 300px;
+      max-width: 500px;
+      text-align: center;
+    }
+    .imagem-container {
+      position: relative;
+    }
+    .imagem-container img {
+      width: 100%;
+      height: auto;
+    }
+    .icone {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+    }
+    #lactose {
+      top: 30%;
+      left: 30%;
+    }
+    #lactase {
+      top: 30%;
+      left: 60%;
+    }
+    .resultado, .mensagem, .gases {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .sintomas {
+      margin-top: 50px;
+    }
+    button {
+      margin-top: 30px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mapa da Digestão</h1>
+  <p style="text-align:center; font-style: italic;">Clique nos ícones para entender os processos de digestão da lactose com e sem lactase.</p>
+
+  <div class="cenarios">
+    <!-- CENÁRIO COM LACTOSE E LACTASE -->
+    <div class="cenario">
+      <h2>Com Lactose e Lactase</h2>
+      <div class="imagem-container">
+        <img src="https://i.postimg.cc/t1MbsdDw/intestino-seco.png" alt="Intestino grosso" id="imgCom">
+        <img src="https://img.icons8.com/emoji/48/milk-glass.png" class="icone" id="lactose" title="Lactose">
+        <img src="https://img.icons8.com/emoji/48/test-tube.png" class="icone" id="lactase" title="Lactase">
+      </div>
+      <div class="resultado" id="resultadoCom"></div>
+    </div>
+
+    <!-- CENÁRIO SEM LACTASE -->
+    <div class="cenario">
+      <h2>Sem Lactase</h2>
+      <div class="imagem-container">
+        <img src="https://i.postimg.cc/t1MbsdDw/intestino-seco.png" alt="Intestino grosso" id="imgSem" onclick="mostrarDiarreia()">
+      </div>
+      <div class="mensagem" id="mensagemSem"></div>
+      <div class="gases" id="gasesSem"></div>
+    </div>
+  </div>
+
+  <!-- SINTOMAS -->
+  <div class="sintomas">
+    <h2>Possíveis Sintomas</h2>
+    <ol>
+      <li>Diarreia aquosa ou pastosa</li>
+      <li>Flatulência e distensão abdominal</li>
+      <li>Cólicas e desconforto abdominal</li>
+      <li>Letargia, apatia e perda de apetite</li>
+      <li>Desidratação (especialmente em filhotes)</li>
+      <li>Enterite hemorrágica (em casos graves, especialmente em roedores e aves)</li>
+    </ol>
+  </div>
+
+  <!-- BOTÃO DE CERTIFICADO -->
+  <div style="text-align:center;">
+    <a href="https://sites.google.com/view/leite-e-pet/pag" target="_self">
+      <button>Ganhe seu certificado</button>
+    </a>
+  </div>
+
+  <script>
+    // Lógica de combinação de lactose e lactase
+    const lactose = document.getElementById('lactose');
+    const lactase = document.getElementById('lactase');
+    const resultadoCom = document.getElementById('resultadoCom');
+
+    let clicouLactose = false;
+    let clicouLactase = false;
+
+    lactose.onclick = () => {
+      clicouLactose = true;
+      verificarCombinacao();
+    };
+
+    lactase.onclick = () => {
+      clicouLactase = true;
+      verificarCombinacao();
+    };
+
+    function verificarCombinacao() {
+      if (clicouLactose && clicouLactase) {
+        resultadoCom.innerText = 'Lactose + Lactase → Glicose + Galactose → Absorção no sangue';
+      }
+    }
+
+    // Lógica para o cenário sem lactase
+    function mostrarDiarreia() {
+      document.getElementById('imgSem').src = 'https://i.postimg.cc/TKzC7pkF/intestino-com-agua.png';
+      document.getElementById('mensagemSem').innerText = 'A presença de lactose no intestino grosso causou diarreia.';
+      setTimeout(() => {
+        document.getElementById('gasesSem').innerText = 'A lactose não digerida gerou CH₄, H₂ e CO₂ — gases prejudiciais';
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
